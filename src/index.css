@@ -1,0 +1,635 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 
+ * ==========================================================================
+ * EcoTwin Architectural Design System: Light & Dark Theme Palette
+ * Built according to professional SaaS/dashboard dark theme principles:
+ * - Background: Navy/charcoal #0B1117, sections #101820, cards #151F27, elevated/modal #1B2732
+ * - Borders: Clearly visible #263642
+ * - Text hierarchy: Headings #F5F7FA, Body #D6DEE6, Secondary #AAB7C4, Muted #82909D, Disabled #66737F
+ * - Semantic status: Tinted dark backgrounds with high-contrast bright text
+ * ==========================================================================
+ */
+
+:root {
+  /* Light Theme Color Tokens */
+  --bg-app: #f5f7f6;
+  --bg-section: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-subtle: #f0f4f2;
+  --bg-well: #e8eee9;
+  --bg-modal: #ffffff;
+  
+  --border-card: #e1e7e3;
+  --border-subtle: #ebf0ec;
+  --border-strong: #c8d3cb;
+
+  --text-primary: #0e1713;
+  --text-body: #23332a;
+  --text-secondary: #43544b;
+  --text-muted: #6e7f76;
+  --text-disabled: #94a39b;
+
+  --color-emerald-solid: #0d7c54;
+  --color-emerald-surface: #e9f6f0;
+  --color-emerald-border: #bce6d2;
+  --color-emerald-text: #096342;
+
+  --color-rose-solid: #cf2242;
+  --color-rose-surface: #fdf0f2;
+  --color-rose-border: #f9ccd3;
+  --color-rose-text: #aa1531;
+
+  --color-amber-solid: #d97706;
+  --color-amber-surface: #fef7eb;
+  --color-amber-border: #fde4b5;
+  --color-amber-text: #925305;
+
+  --color-sky-solid: #0284c7;
+  --color-sky-surface: #edf7fc;
+  --color-sky-border: #c9e5f7;
+  --color-sky-text: #0b6192;
+}
+
+.dark {
+  /* Professional Dark Theme Tokens */
+  --bg-app: #0B1117;
+  --bg-section: #101820;
+  --bg-card: #151F27;
+  --bg-modal: #1B2732;
+  --bg-control: #202D3A;
+  --bg-control-hover: #283848;
+
+  --border-card: #263642;
+  --border-subtle: #1E2B35;
+  --border-strong: #384C5C;
+
+  --text-primary: #F5F7FA;
+  --text-body: #D6DEE6;
+  --text-secondary: #AAB7C4;
+  --text-muted: #82909D;
+  --text-disabled: #66737F;
+
+  --color-emerald-solid: #10B981;
+  --color-emerald-surface: rgba(16, 185, 129, 0.15);
+  --color-emerald-border: rgba(52, 211, 153, 0.35);
+  --color-emerald-text: #5EE6B0;
+
+  --color-rose-solid: #EF4444;
+  --color-rose-surface: rgba(239, 68, 68, 0.15);
+  --color-rose-border: rgba(248, 113, 113, 0.35);
+  --color-rose-text: #FF7B7B;
+
+  --color-amber-solid: #F59E0B;
+  --color-amber-surface: rgba(245, 158, 11, 0.15);
+  --color-amber-border: rgba(251, 191, 36, 0.35);
+  --color-amber-text: #FCD34D;
+
+  --color-sky-solid: #0EA5E9;
+  --color-sky-surface: rgba(14, 165, 233, 0.15);
+  --color-sky-border: rgba(56, 189, 248, 0.35);
+  --color-sky-text: #7DD3FC;
+}
+
+@layer base {
+  * {
+    border-color: #e1e7e3;
+  }
+  .dark * {
+    border-color: #263642;
+  }
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #0e1713;
+    background-color: #f5f7f6;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .dark body,
+  body.dark,
+  html.dark body {
+    color: #D6DEE6;
+    background-color: #0B1117;
+  }
+  .dark {
+    color-scheme: dark;
+  }
+}
+
+/* ==========================================================================
+ * Dark Theme: Centralized Systemic Overrides
+ * Applies consistent contrast to every surface, text, border, button, and badge.
+ * ========================================================================== */
+
+/* 1. Surfaces & Backgrounds */
+.dark .bg-slate-950,
+.dark .bg-slate-950\/50,
+.dark .bg-slate-950\/60,
+.dark .bg-slate-950\/70,
+.dark .bg-slate-950\/80 {
+  background-color: #0B1117 !important;
+}
+
+.dark .bg-slate-900,
+.dark .bg-slate-900\/50,
+.dark .bg-slate-900\/60,
+.dark .bg-slate-900\/70,
+.dark .bg-slate-900\/80,
+.dark .bg-slate-900\/90 {
+  background-color: #101820 !important;
+}
+
+/* Card surfaces: distinctly separated from page background */
+.dark .bg-white {
+  background-color: #151F27 !important;
+}
+
+/* Wells, inner containers, nested panels inside cards */
+.dark .bg-slate-50,
+.dark .bg-slate-50\/50,
+.dark .bg-slate-50\/60,
+.dark .bg-slate-50\/70,
+.dark .bg-slate-50\/80,
+.dark [class*="bg-slate-50/"] {
+  background-color: #101820 !important;
+}
+
+/* Inner controls, elevated pills, chips */
+.dark .bg-slate-100,
+.dark .bg-slate-100\/70,
+.dark .bg-slate-100\/80,
+.dark [class*="bg-slate-100/"] {
+  background-color: #1B2732 !important;
+}
+
+.dark .bg-slate-200 {
+  background-color: #202D3A !important;
+}
+
+.dark .bg-slate-800,
+.dark .bg-slate-800\/60,
+.dark .bg-slate-800\/70,
+.dark .bg-slate-800\/80,
+.dark .bg-slate-800\/90 {
+  background-color: #151F27 !important;
+}
+
+/* 2. Borders */
+.dark .border-slate-100,
+.dark .border-slate-200,
+.dark .border-slate-200\/50,
+.dark .border-slate-200\/60,
+.dark .border-slate-200\/70,
+.dark .border-slate-200\/80,
+.dark .border-slate-200\/90,
+.dark .border-slate-300,
+.dark .border-slate-700,
+.dark .border-slate-700\/60,
+.dark .border-slate-700\/80,
+.dark .border-slate-800,
+.dark .border-slate-800\/60,
+.dark .border-slate-800\/80,
+.dark .border-slate-800\/90 {
+  border-color: #263642 !important;
+}
+
+.dark .border-slate-400,
+.dark .border-slate-500,
+.dark .border-slate-600 {
+  border-color: #384C5C !important;
+}
+
+/* 3. Typography Levels */
+/* Primary Headings & High-Emphasis Numbers */
+.dark .text-slate-900,
+.dark .text-slate-800,
+.dark .text-slate-100,
+.dark .text-white {
+  color: #F5F7FA !important;
+}
+
+/* Main Body & Active Labels */
+.dark .text-slate-700,
+.dark .text-slate-600,
+.dark .text-slate-200 {
+  color: #D6DEE6 !important;
+}
+
+/* Secondary Text: Metrics Labels, Subtitles, Descriptions (High-contrast, never dark gray!) */
+.dark .text-slate-500,
+.dark .text-slate-300 {
+  color: #AAB7C4 !important;
+}
+
+/* Muted Text: Captions, Subtle Notes, Timestamps */
+.dark .text-slate-400 {
+  color: #82909D !important;
+}
+
+/* 4. Semantic Status Colors & Badges */
+
+/* --- EMERALD (Success / Savings / Verified) --- */
+.bg-emerald-50,
+[class*="bg-emerald-50/"] {
+  background-color: #e9f6f0;
+}
+.border-emerald-200,
+.border-emerald-200\/80,
+.border-emerald-300 {
+  border-color: #bce6d2;
+}
+.text-emerald-700,
+.text-emerald-800,
+.text-emerald-900,
+.text-emerald-950 {
+  color: #096342;
+}
+
+.dark .bg-emerald-50,
+.dark .bg-emerald-50\/50,
+.dark .bg-emerald-50\/60,
+.dark .bg-emerald-50\/70,
+.dark .bg-emerald-50\/80,
+.dark [class*="bg-emerald-50/"],
+.dark .bg-emerald-950\/50,
+.dark .bg-emerald-950\/60 {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+}
+.dark .bg-emerald-100,
+.dark .bg-emerald-200,
+.dark .bg-emerald-500\/20,
+.dark .bg-emerald-900\/40 {
+  background-color: rgba(16, 185, 129, 0.22) !important;
+}
+.dark .border-emerald-100,
+.dark .border-emerald-200,
+.dark .border-emerald-200\/60,
+.dark .border-emerald-200\/80,
+.dark .border-emerald-300,
+.dark .border-emerald-500\/30,
+.dark .border-emerald-500\/40,
+.dark .border-emerald-700,
+.dark .border-emerald-800,
+.dark .border-emerald-800\/60 {
+  border-color: rgba(52, 211, 153, 0.35) !important;
+}
+.dark .text-emerald-400,
+.dark .text-emerald-500,
+.dark .text-emerald-600,
+.dark .text-emerald-700,
+.dark .text-emerald-800,
+.dark .text-emerald-900,
+.dark .text-emerald-950 {
+  color: #5EE6B0 !important;
+}
+
+/* --- ROSE / RED (Error / Anomalies / Waste Spikes) --- */
+.bg-rose-50,
+[class*="bg-rose-50/"] {
+  background-color: #fdf0f2;
+}
+.border-rose-200,
+.border-rose-200\/80,
+.border-rose-300 {
+  border-color: #f9ccd3;
+}
+.text-rose-700,
+.text-rose-800,
+.text-rose-900,
+.text-rose-950 {
+  color: #aa1531;
+}
+
+.dark .bg-rose-50,
+.dark .bg-rose-50\/60,
+.dark .bg-rose-50\/70,
+.dark .bg-rose-50\/80,
+.dark [class*="bg-rose-50/"],
+.dark .bg-rose-950\/50,
+.dark .bg-rose-950\/60 {
+  background-color: rgba(239, 68, 68, 0.15) !important;
+}
+.dark .bg-rose-100,
+.dark .bg-rose-200,
+.dark .bg-rose-500\/20 {
+  background-color: rgba(239, 68, 68, 0.22) !important;
+}
+.dark .border-rose-100,
+.dark .border-rose-200,
+.dark .border-rose-200\/60,
+.dark .border-rose-200\/80,
+.dark .border-rose-300,
+.dark .border-rose-500\/30,
+.dark .border-rose-500\/40,
+.dark .border-rose-700,
+.dark .border-rose-800 {
+  border-color: rgba(248, 113, 113, 0.35) !important;
+}
+.dark .text-rose-400,
+.dark .text-rose-500,
+.dark .text-rose-600,
+.dark .text-rose-700,
+.dark .text-rose-800,
+.dark .text-rose-900,
+.dark .text-rose-950 {
+  color: #FF7B7B !important;
+}
+
+/* --- AMBER (Warnings / Electricity Alerts) --- */
+.bg-amber-50,
+[class*="bg-amber-50/"] {
+  background-color: #fef7eb;
+}
+.border-amber-200,
+.border-amber-200\/80,
+.border-amber-300 {
+  border-color: #fde4b5;
+}
+.text-amber-700,
+.text-amber-800,
+.text-amber-900,
+.text-amber-950 {
+  color: #925305;
+}
+
+.dark .bg-amber-50,
+.dark .bg-amber-50\/60,
+.dark .bg-amber-50\/70,
+.dark .bg-amber-50\/80,
+.dark [class*="bg-amber-50/"] {
+  background-color: rgba(245, 158, 11, 0.15) !important;
+}
+.dark .bg-amber-100,
+.dark .bg-amber-200,
+.dark .bg-amber-500\/20 {
+  background-color: rgba(245, 158, 11, 0.22) !important;
+}
+.dark .border-amber-100,
+.dark .border-amber-200,
+.dark .border-amber-200\/60,
+.dark .border-amber-200\/80,
+.dark .border-amber-300,
+.dark .border-amber-500\/30,
+.dark .border-amber-500\/40 {
+  border-color: rgba(251, 191, 36, 0.35) !important;
+}
+.dark .text-amber-400,
+.dark .text-amber-500,
+.dark .text-amber-600,
+.dark .text-amber-700,
+.dark .text-amber-800,
+.dark .text-amber-900,
+.dark .text-amber-950 {
+  color: #FCD34D !important;
+}
+
+/* --- SKY / BLUE (Water / Flow / Sensors) --- */
+.bg-sky-50,
+[class*="bg-sky-50/"] {
+  background-color: #edf7fc;
+}
+.border-sky-200,
+.border-sky-300 {
+  border-color: #c9e5f7;
+}
+.text-sky-700,
+.text-sky-800 {
+  color: #0b6192;
+}
+
+.dark .bg-sky-50,
+.dark .bg-sky-50\/60,
+.dark .bg-sky-50\/70,
+.dark .bg-sky-50\/80,
+.dark [class*="bg-sky-50/"],
+.dark .bg-blue-50,
+.dark [class*="bg-blue-50/"] {
+  background-color: rgba(14, 165, 233, 0.15) !important;
+}
+.dark .bg-sky-100,
+.dark .bg-sky-200,
+.dark .bg-blue-100 {
+  background-color: rgba(14, 165, 233, 0.22) !important;
+}
+.dark .border-sky-100,
+.dark .border-sky-200,
+.dark .border-sky-300,
+.dark .border-blue-200 {
+  border-color: rgba(56, 189, 248, 0.35) !important;
+}
+.dark .text-sky-400,
+.dark .text-sky-500,
+.dark .text-sky-600,
+.dark .text-sky-700,
+.dark .text-sky-800,
+.dark .text-sky-900,
+.dark .text-sky-950,
+.dark .text-blue-400,
+.dark .text-blue-500,
+.dark .text-blue-600,
+.dark .text-blue-700,
+.dark .text-blue-800 {
+  color: #7DD3FC !important;
+}
+
+/* --- TEAL (Carbon / Clean Efficiency) --- */
+.dark .bg-teal-50,
+.dark [class*="bg-teal-50/"] {
+  background-color: rgba(20, 184, 166, 0.15) !important;
+}
+.dark .border-teal-200,
+.dark .border-teal-300 {
+  border-color: rgba(45, 212, 191, 0.35) !important;
+}
+.dark .text-teal-400,
+.dark .text-teal-500,
+.dark .text-teal-600,
+.dark .text-teal-700,
+.dark .text-teal-800,
+.dark .text-teal-900,
+.dark .text-teal-950 {
+  color: #5EEAD4 !important;
+}
+
+/* --- INDIGO / PURPLE (Intelligence / Neural) --- */
+.dark .bg-indigo-50,
+.dark .bg-indigo-50\/60,
+.dark .bg-indigo-100,
+.dark .bg-purple-50 {
+  background-color: rgba(99, 102, 241, 0.15) !important;
+}
+.dark .border-indigo-200,
+.dark .border-indigo-300,
+.dark .border-purple-200 {
+  border-color: rgba(129, 140, 248, 0.35) !important;
+}
+.dark .text-indigo-400,
+.dark .text-indigo-500,
+.dark .text-indigo-600,
+.dark .text-indigo-700,
+.dark .text-indigo-800,
+.dark .text-indigo-900,
+.dark .text-purple-400,
+.dark .text-purple-600,
+.dark .text-purple-700 {
+  color: #A5B4FC !important;
+}
+
+/* 5. Buttons & Interactive Controls */
+/* Secondary Neutral Buttons in Dark Mode */
+.dark button.bg-white,
+.dark a.bg-white {
+  background-color: #151F27 !important;
+  border: 1px solid #263642 !important;
+  color: #D6DEE6 !important;
+}
+
+.dark button.bg-white:hover,
+.dark a.bg-white:hover {
+  background-color: #202D3A !important;
+  color: #F5F7FA !important;
+  border-color: #384C5C !important;
+}
+
+/* Secondary Dark Buttons in Dark Mode */
+.dark button.bg-slate-900:not(.bg-gradient-to-r),
+.dark a.bg-slate-900:not(.bg-gradient-to-r) {
+  background-color: #1B2732 !important;
+  border: 1px solid #384C5C !important;
+  color: #F5F7FA !important;
+}
+
+.dark button.bg-slate-900:hover:not(.bg-gradient-to-r),
+.dark a.bg-slate-900:hover:not(.bg-gradient-to-r) {
+  background-color: #263642 !important;
+  color: #ffffff !important;
+}
+
+/* Subtle Action Buttons (bg-slate-50 / bg-slate-100) */
+.dark button.bg-slate-50,
+.dark button.bg-slate-100 {
+  background-color: #1B2732 !important;
+  border-color: #263642 !important;
+  color: #D6DEE6 !important;
+}
+
+.dark button.bg-slate-50:hover,
+.dark button.bg-slate-100:hover {
+  background-color: #202D3A !important;
+  color: #F5F7FA !important;
+}
+
+/* Hover States in Dark Mode */
+.dark .hover\:bg-slate-50:hover {
+  background-color: #1A242E !important;
+}
+
+.dark .hover\:bg-slate-100:hover {
+  background-color: #202D3A !important;
+}
+
+.dark .hover\:bg-slate-200:hover {
+  background-color: #283848 !important;
+}
+
+/* 6. Form Controls & Inputs */
+.dark select,
+.dark input[type="text"],
+.dark input[type="search"] {
+  background-color: #101820 !important;
+  border-color: #263642 !important;
+  color: #F5F7FA !important;
+}
+
+.dark select option {
+  background-color: #151F27 !important;
+  color: #F5F7FA !important;
+}
+
+.dark input[type="range"] {
+  accent-color: #10B981;
+}
+
+/* 7. Charts & Recharts Styling (Accessible Axis, Legends, Tooltips) */
+.recharts-cartesian-grid line {
+  stroke: #e2e8e4 !important;
+}
+.recharts-text {
+  fill: #6e7f76 !important;
+}
+
+.dark .recharts-cartesian-grid line {
+  stroke: #263642 !important;
+}
+.dark .recharts-text {
+  fill: #AAB7C4 !important;
+}
+.dark .recharts-legend-item-text {
+  color: #D6DEE6 !important;
+}
+.dark .recharts-tooltip-wrapper {
+  outline: none !important;
+}
+.dark .recharts-default-tooltip {
+  background-color: #1B2732 !important;
+  border: 1px solid #263642 !important;
+  border-radius: 12px !important;
+  color: #F5F7FA !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 8. Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #edf2ee;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #0B1117;
+}
+::-webkit-scrollbar-thumb {
+  background: #cad5ce;
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #263642;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9ab0a4;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #384C5C;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.animate-dash-flow {
+  stroke-dasharray: 6 4;
+  animation: dashFlow 1.5s linear infinite;
+}

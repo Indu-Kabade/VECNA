@@ -1,0 +1,91 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Telemetry Collection (Synced from IoT Gateway)
+    match /telemetry/{readingId} {
+      allow read: if true;
+      allow create, update: if isValidTelemetry(request.resource.data);
+      allow delete: if false;
+    }
+
+    // Anomaly Events Collection (Detected Locally or via Cloud)
+    match /anomalies/{anomalyId} {
+      allow read: if true;
+      allow create, update: if isValidAnomaly(request.resource.data);
+      allow delete: if false;
+    }
+
+    function isValidTelemetry(data) {
+      return data.readingId is string && data.readingId.size() <= 128
+        && data.sensorId is string && data.sensorId.size() <= 64
+        && data.buildingId is string && data.buildingId.size() <= 64
+        && (data.floor is int || data.floor is string)
+        && data.resourceType is string
+        && (data.value is int || data.value is float)
+        && data.unit is string
+        && data.timestamp is string
+        && data.syncStatus is string;
+    }
+
+    function isValidAnomaly(data) {
+      return data.anomalyId is string && data.anomalyId.size() <= 128
+        && data.readingId is string && data.readingId.size() <= 128
+        && data.resourceType is string
+        && data.building is string
+        && (data.floor is int || data.floor is string)
+        && (data.actualValue is int || data.actualValue is float)
+        && (data.baselineValue is int || data.baselineValue is float)
+        && (data.deviationPercentage is int || data.deviationPercentage is float)
+        && data.severity is string
+        && data.timestamp is string;
+    }
+
+    // Applied Solutions Collection
+    match /solutions/{solutionId} {
+      allow read: if true;
+      allow create: if isValidSolution(request.resource.data);
+      allow update: if isValidSolution(request.resource.data);
+      allow delete: if false;
+    }
+
+    // User Profiles Collection
+    match /users/{userId} {
+      allow read: if true;
+      allow create, update: if isValidUser(request.resource.data);
+      allow delete: if false;
+    }
+
+    // OTP Verifications (Protected: server-side backend operations only)
+    match /otp_verifications/{id} {
+      allow read, write: if false;
+    }
+
+    function isValidUser(data) {
+      return data.uid is string && data.uid.size() <= 128
+        && data.email is string && data.email.size() <= 256
+        && data.displayName is string && data.displayName.size() <= 128
+        && data.role is string && data.role.size() <= 64;
+    }
+
+    function isValidSolution(data) {
+      return data.solutionId is string && data.solutionId.size() <= 128
+        && data.buildingId is string && data.buildingId.size() <= 64
+        && data.floor is string && data.floor.size() <= 64
+        && data.problemId is string && data.problemId.size() <= 64
+        && (data.resourceType == 'electricity' || data.resourceType == 'water')
+        && data.solutionName is string && data.solutionName.size() <= 256
+        && data.solutionDescription is string && data.solutionDescription.size() <= 1000
+        && data.problemDescription is string && data.problemDescription.size() <= 1000
+        && (data.estimatedSavingsKwh is int || data.estimatedSavingsKwh is float)
+        && (data.estimatedSavingsRupees is int || data.estimatedSavingsRupees is float)
+        && data.appliedAt is string && data.appliedAt.size() <= 64
+        && (data.status == 'Active' || data.status == 'Completed')
+        && data.appliedBy is string && data.appliedBy.size() <= 128;
+    }
+  }
+}

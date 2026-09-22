@@ -1,0 +1,8 @@
+{
+  "name": "VECNA",
+  "description": "AI-driven digital twin that detects abnormal energy and water consumption, diagnoses root causes, recommends evidence-based interventions, and verifies actual savings.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

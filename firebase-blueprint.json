@@ -1,0 +1,193 @@
+{
+  "entities": {
+    "AppliedSolution": {
+      "title": "AppliedSolution",
+      "description": "Represents an energy or water conservation solution applied to the campus digital twin.",
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "buildingId": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "floor": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "problemId": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "resourceType": {
+          "type": "string",
+          "enum": ["electricity", "water"]
+        },
+        "solutionName": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "solutionDescription": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "problemDescription": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "estimatedSavingsKwh": {
+          "type": "number"
+        },
+        "estimatedSavingsRupees": {
+          "type": "number"
+        },
+        "appliedAt": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Active", "Completed"]
+        },
+        "appliedBy": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "syncStatus": {
+          "type": "string",
+          "enum": ["synced", "pending"]
+        }
+      },
+      "required": [
+        "solutionId",
+        "buildingId",
+        "floor",
+        "problemId",
+        "resourceType",
+        "solutionName",
+        "solutionDescription",
+        "problemDescription",
+        "estimatedSavingsKwh",
+        "estimatedSavingsRupees",
+        "appliedAt",
+        "status",
+        "appliedBy"
+      ]
+    },
+    "User": {
+      "title": "User",
+      "description": "Registered campus user profile with facility role and credentials metadata.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "maxLength": 256
+        },
+        "displayName": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "role": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "createdAt": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "lastLoginAt": {
+          "type": "string",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "uid",
+        "email",
+        "displayName",
+        "role"
+      ]
+    },
+    "Telemetry": {
+      "title": "Telemetry",
+      "description": "IoT sensor telemetry readings synchronized from the Local Sensor Gateway.",
+      "type": "object",
+      "properties": {
+        "readingId": { "type": "string", "maxLength": 128 },
+        "sensorId": { "type": "string", "maxLength": 64 },
+        "buildingId": { "type": "string", "maxLength": 64 },
+        "floor": { "type": "number" },
+        "resourceType": { "type": "string", "maxLength": 32 },
+        "value": { "type": "number" },
+        "unit": { "type": "string", "maxLength": 32 },
+        "timestamp": { "type": "string", "maxLength": 64 },
+        "syncStatus": { "type": "string", "maxLength": 32 },
+        "createdAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["readingId", "sensorId", "buildingId", "floor", "resourceType", "value", "unit", "timestamp", "syncStatus"]
+    },
+    "Anomaly": {
+      "title": "Anomaly",
+      "description": "Resource consumption anomalies detected locally via threshold fallback or cloud analysis.",
+      "type": "object",
+      "properties": {
+        "anomalyId": { "type": "string", "maxLength": 128 },
+        "readingId": { "type": "string", "maxLength": 128 },
+        "resourceType": { "type": "string", "maxLength": 32 },
+        "building": { "type": "string", "maxLength": 64 },
+        "floor": { "type": "number" },
+        "actualValue": { "type": "number" },
+        "baselineValue": { "type": "number" },
+        "deviationPercentage": { "type": "number" },
+        "severity": { "type": "string", "maxLength": 32 },
+        "timestamp": { "type": "string", "maxLength": 64 },
+        "detectedOffline": { "type": "boolean" },
+        "syncStatus": { "type": "string", "maxLength": 32 }
+      },
+      "required": ["anomalyId", "readingId", "resourceType", "building", "floor", "actualValue", "baselineValue", "deviationPercentage", "severity", "timestamp"]
+    },
+    "OtpVerification": {
+      "title": "OtpVerification",
+      "description": "Cryptographically hashed OTP records with 5-minute expiration and max attempt tracking.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "format": "email", "maxLength": 256 },
+        "otpHash": { "type": "string", "maxLength": 128 },
+        "expiresAt": { "type": "number" },
+        "attempts": { "type": "number" },
+        "createdAt": { "type": "number" },
+        "verifiedAt": { "type": "number" }
+      },
+      "required": ["id", "email", "otpHash", "expiresAt", "attempts", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/solutions/{solutionId}": {
+      "schema": "AppliedSolution",
+      "description": "Applied solutions log tracking energy and water intervention records for the campus."
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles and facility manager role metadata."
+    },
+    "/telemetry/{readingId}": {
+      "schema": "Telemetry",
+      "description": "IoT sensor telemetry readings synchronized from the Local Sensor Gateway."
+    },
+    "/anomalies/{anomalyId}": {
+      "schema": "Anomaly",
+      "description": "Resource anomalies detected locally or through cloud analysis."
+    },
+    "/otp_verifications/{id}": {
+      "schema": "OtpVerification",
+      "description": "Hashed email OTP verification records."
+    }
+  }
+}

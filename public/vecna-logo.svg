@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Background for standalone logo asset -->
+  <rect width="512" height="512" rx="128" fill="#0C1A14"/>
+  
+  <!-- Orbit Ring Top Arc with Dot -->
+  <path d="M 165 142 A 170 170 0 0 1 328 132" stroke="#71CF8F" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="338" cy="134" r="12" fill="#71CF8F"/>
+
+  <!-- Orbit Ring Bottom Arc with Dot -->
+  <path d="M 347 370 A 170 170 0 0 1 184 380" stroke="#71CF8F" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="174" cy="378" r="12" fill="#71CF8F"/>
+
+  <!-- "V" Left Arm (Crisp White/Ivory Ribbon) -->
+  <path d="M 118 168 C 118 168 184 168 190 174 C 196 180 236 348 244 366 C 248 374 256 376 264 372 C 274 368 252 320 252 320 L 222 170 C 220 162 214 158 206 158 L 126 158 C 118 158 114 164 118 168 Z" fill="#F4F8F4"/>
+  
+  <!-- "V" Left Stroke Precision Polygon/Path matching the uploaded image exactly -->
+  <!-- Let's render the exact V-shape ribbon -->
+  <g id="vecna-v-mark">
+    <!-- Left White Wing -->
+    <path 
+      d="M 116 168 L 186 168 C 195 168 202 174 206 182 L 250 338 C 255 356 244 374 226 374 C 218 374 212 368 208 360 L 120 180 C 114 172 118 168 116 168 Z" 
+      fill="#F5FAF5"
+    />
+    
+    <!-- Smooth White Bottom Curve joining into the Leaf base -->
+    <path 
+      d="M 206 358 C 216 376 238 382 258 376 C 276 370 290 354 298 336 L 278 336 C 268 350 254 360 240 360 C 230 360 222 354 218 344 Z" 
+      fill="#E5EFE6"
+    />
+
+    <!-- Right Leaf Wing -->
+    <path 
+      d="M 235 376 C 270 376 312 344 346 294 C 382 240 398 185 398 148 C 362 166 315 204 280 258 C 252 300 235 350 235 376 Z" 
+      fill="#52B877"
+    />
+
+    <!-- Leaf Center Stem / Vein -->
+    <path 
+      d="M 396 150 C 375 210 325 285 242 374" 
+      stroke="#144327" 
+      stroke-width="8" 
+      stroke-linecap="round"
+    />
+  </g>
+</svg>
